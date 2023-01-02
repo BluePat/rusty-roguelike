@@ -1,6 +1,19 @@
 #![warn(clippy::all, clippy::pedantic)]
 
-use bracket_lib::prelude::*;
+mod map;
+
+// Simplifying module access
+mod prelude {
+    // publicly using bracket_lib prelude re-exports it inside prelude
+    pub use bracket_lib::prelude::*;
+
+    pub use crate::map::*;
+
+    pub const SCREEN_WIDTH: i32 = 80;
+    pub const SCREEN_HEIGHT: i32 = 50;
+}
+
+use prelude::*;
 
 struct State {}
 
