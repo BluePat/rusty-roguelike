@@ -15,13 +15,23 @@ mod prelude {
 
 use prelude::*;
 
-struct State {}
+struct State {
+    map: Map,
+}
+
+impl State {
+    fn new() -> Self {
+        Self {
+            map: Map::new(),
+        }
+    }
+}
 
 impl GameState for State {
 
     fn tick(&mut self, ctx: &mut BTerm) {
         ctx.cls();
-        ctx.print(1, 1, "Hello, Bracket Terminal!");
+        self.map.render(ctx);
     }
 
 }
@@ -32,6 +42,6 @@ fn main() -> BError {
     .with_title("Rusty Roguelike")
     .build()?;
 
-    main_loop(context, State{})
+    main_loop(context, State::new())
 }
 
